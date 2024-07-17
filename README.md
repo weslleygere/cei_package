@@ -22,7 +22,7 @@ A complete executable `run_cei.sh`, encompassing all above-mentioned steps, as w
 If you find this work useful and use it in your research, industrial projects, practical applications, etc. please cite the following paper:
 
 ``` 
-Soon - soon - soon.
+Soon.
 ``` 
 
 and take the time to acknowledge this github page.
@@ -183,8 +183,7 @@ would result in the creation of three output folders with the following content:
    - `raw_activations.png`: plot of the `activation_matrix.csv`.
    - `contrastive_curves.png`: plot of the `curves.csv`.
 
-
 ## References
 
-[1] [CLAP](https://github.com/microsoft/CLAP) : [https://arxiv.org/pdf/2206.04769](https://arxiv.org/pdf/2206.04769) 
+[1] [CLAP](https://github.com/microsoft/CLAP) - Elizalde, B., Deshmukh, S., Al Ismail, M., & Wang, H. (2023, June). Clap: learning audio concepts from natural language supervision. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE. [https://arxiv.org/pdf/2206.04769](https://arxiv.org/pdf/2206.04769) 
 
