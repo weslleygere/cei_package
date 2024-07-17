@@ -36,7 +36,7 @@ and take the time to acknowledge this GitHub page ([https://github.com/ear-team/
 These are listed in the `requirements.txt` file and are all easily installable via, *e.g.*, `pip install`. 
 Any reasonably recent version of these packages should work. 
 
-For convenience, we recommend creating a new `conda` environment (with chosen `<my-env>`) by running the 
+For convenience, we recommend creating a new `conda` environment (with a chosen name `<my-env>`) by running the 
 next commands in a Terminal:
 ```
 conda create --name <my-env> python==3.11.0
