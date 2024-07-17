@@ -25,7 +25,7 @@ If you find this work useful and use it in your research, industrial projects, p
 Soon.
 ``` 
 
-and take the time to acknowledge this github page.
+and take the time to acknowledge this GitHub page ([https://github.com/ear-team/cei_package](https://github.com/ear-team/cei_package)).
 
 ## Installation
 
