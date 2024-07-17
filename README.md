@@ -123,7 +123,7 @@ The `batch_size` parameter (default: 64) is the number of audio files read, proc
 Depending on the typical duration of your audio recordings and your hardware, you may have sufficient memory to increase this parameter (for faster extraction of all audio embeddings) or you may lack sufficient available memory and thus would need to reduce this parameter.
 By default, we have set `batch_size=64`. For information, on a recent machine (`Dell Inc. Precision 3581, 13th Gen Intel® Core™ i7-13700H × 20, 64.0 GiB memory`) with audio recordings of 1-min duration, a `batch_size` of `128` can have been used. 
 
-The duration parameter (default: 6.0 seconds) represents the typical length into which longer audio files are segmented to compute embeddings locally. For instance, an audio file of 1 minute would be subdivided into 10 segments of 6 seconds each. This approach allows for more reliable application of CLAP, as local events that might be omitted when processing the whole audio can be detected by breaking it down into smaller, uniform segments.
+The `duration` parameter (default: 6.0 seconds) represents the typical length into which longer audio files are segmented to compute embeddings locally. For instance, an audio file of 1 minute would be subdivided into 10 segments of 6 seconds each. This approach allows for more reliable application of CLAP, as local events that might be omitted when processing the whole audio can be detected by breaking it down into smaller, uniform segments.
 
 You can specify another configuration file (*e.g.*, `<new-config>`) to all `src` python codes with the optional parameter `--config <new-config>`.
 
