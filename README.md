@@ -176,13 +176,12 @@ would result in the creation of three output folders with the following content:
 * `<output-folder>/sim_<text-file>/`: batches of audio-text similarities saved in `npz` format (`numpy` compressed arrays).
 
 * `<output-folder>/out_<text-file>/`:
-
-- `activation_matrix.csv`: the raw audio-text activation matrix.
-- `curves.csv`: the temporal curves indicating biophony, geophony, anthropophony and technophony levels in the soundscape.
-- `CEI.csv`: the four CEI values.
-
-- `raw_activations.png`: plot of the `activation_matrix.csv`.
-- `contrastive_curves.png`: plot of the `curves.csv`.
+   - `activation_matrix.csv`: the raw audio-text activation matrix.
+   - `curves.csv`: the temporal curves indicating biophony, geophony, anthropophony and technophony levels in the soundscape.
+   - `CEI.csv`: the four CEI values.
+   
+   - `raw_activations.png`: plot of the `activation_matrix.csv`.
+   - `contrastive_curves.png`: plot of the `curves.csv`.
 
 
 ## References
