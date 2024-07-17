@@ -15,7 +15,7 @@ def main(argv):
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("--classes", default="classes/classes.txt")
     parser.add_argument("--out", default="outputs")
-    parser.add_argument("--config", default="config.txt")
+    parser.add_argument("--config", default="src/config.txt")
     parse_args = parser.parse_args()
     args = {} 
     conv = { 'int': int, 
