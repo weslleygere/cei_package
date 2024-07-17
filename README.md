@@ -53,6 +53,7 @@ pip install -r requirements.txt
 
 To check that everything is correctly installed and should work fine, please run:
 ```
+chmod u+r+x run_cei.sh
 cd unit_tests
 python unit_tests.py
 ```
