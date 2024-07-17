@@ -1,0 +1,22 @@
+# CLAP
+clap_version,2023,str
+clap_caption,clapcap,str
+clap_cuda,False,bool
+
+# Inference
+batch_size,64,int
+duration,6.0,float
+eps,1e-6,float
+max_sim,20.,float
+min_sim,-10.,float
+thr_sim,5.,float
+one_min_sec,60.,float
+thr_activity,0.1,float
+
+# Management
+tmp_audio,./tmp_audio/,str
+
+# Plotting
+grey_color,#000000,str
+facecolor,white,str
+axbackcolor,white,str
