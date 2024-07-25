@@ -29,6 +29,11 @@ and take the time to acknowledge this GitHub page ([https://github.com/ear-team/
 
 ## Installation
 
+```
+git clone ear-team/cei_package
+cd cei_package
+```
+
 `cei_package` has been developed with `Python==3.11.0`.
 
 `cei_package` relies on various classical Python packages such as [`numpy`](http://www.numpy.org/), 
@@ -75,6 +80,8 @@ then you are ready to proceed.
 ./run_cei.sh <audio-folder> <text-file> <output-folder> 
 ```
 
+The `<output-folder>` does need to already exist, it can be created on the fly.
+
 Toy example:
 ```
 ./run_cei.sh data txt/classes.txt out 
@@ -87,7 +94,7 @@ Toy example:
 The `cei_package` code layout is as follows.
 
 - `data` folder contains 96 1-min audio files for examples and unit tests. These audios 
-feature  a whole day of soundscape recordings in the Risoux Forest, Jura, France.
+feature a whole day of soundscape recordings in the Risoux Forest, Jura, France.
 
 - `notebook` folder contains a notebook showing how to calculate the CEI and integrate the various steps in your own pipeline with your own sound data.
 
@@ -105,9 +112,11 @@ python compute_CEI.py --classes <text-file> --out <output-folder>
 python visualize_CEI.py --classes <text-file> --out <output-folder>
 ```
 
-- `txt` folder contains possible lists of elements of interest to investigate soundscapes.  
+- `txt` folder contains possible lists of elements of interest to investigate soundscapes.
 
-- `run_cei.sh`: an executable file encompassing the complete CEI computation pipeline.  
+- `unit_tests` folder contains material for unit tests. 
+
+- `run_cei.sh`: an executable file encompassing the complete CEI computation pipeline.
 
 ```
 ./run_cei.sh <audio-folder> <text-file> <output-folder> 
@@ -122,9 +131,9 @@ in our CEI pipeline, two of which may require tuning according to your dataset o
 
 The `batch_size` parameter (default: 64) is the number of audio files read, processed and saved at the same time by the CLAP model. 
 Depending on the typical duration of your audio recordings and your hardware, you may have sufficient memory to increase this parameter (for faster extraction of all audio embeddings) or you may lack sufficient available memory and thus would need to reduce this parameter.
-By default, we have set `batch_size=64`. For information, on a recent machine (`Dell Inc. Precision 3581, 13th Gen Intel® Core™ i7-13700H × 20, 64.0 GiB memory`) with audio recordings of 1-min duration, a `batch_size` of `128` can have been used. 
+By default, we have set `batch_size` to 64. For information, on a recent machine (`Dell Inc. Precision 3581, 13th Gen Intel® Core™ i7-13700H × 20, 64.0 GiB memory`) with audio recordings of 1-min duration, a `batch_size` of 128 can have been used. 
 
-The `duration` parameter (default: 6.0 seconds) represents the typical length into which longer audio files are segmented to compute embeddings locally. For instance, an audio file of 1 minute would be subdivided into 10 segments of 6 seconds each. This approach allows for more reliable application of CLAP, as local events that might be omitted when processing the whole audio can be detected by breaking it down into smaller, uniform segments.
+The duration parameter (default: 6.0 seconds) represents the typical length into which longer audio files are segmented to compute embeddings locally. For instance, an audio file of 1 minute would be subdivided into 10 segments of 6 seconds each. This approach allows for more reliable application of CLAP, as local events that might be omitted when processing the whole audio can be detected by breaking it down into smaller, uniform segments.
 
 You can specify another configuration file (*e.g.*, `<new-config>`) to all `src` python codes with the optional parameter `--config <new-config>`.
 
@@ -132,7 +141,9 @@ You can specify another configuration file (*e.g.*, `<new-config>`) to all `src`
 
 We ask the user to specify a folder `<audio-folder>` containing raw audio files in `.wav` or `.mp3` format. 
 
-Audio recordings are turned into audio embeddings by the [CLAP](https://github.com/microsoft/CLAP) model. Their processing thus follows the original CLAP pipeline (see [1]).
+The computation pipeline considers that all audio already are time-orderered by the user, such that the first audio indicates the start of the acoustic monitoring and the last audio is the end or current state of the acoustic monitoring. This is usually the case in practice as recoders typically save audios following a `YYYYMMDD_hhmmss` (year, month, day, hour, minutes, seconds) designation.
+
+The raw audio recordings are turned into audio embeddings by the [CLAP](https://github.com/microsoft/CLAP) model. Their processing thus follows the original CLAP pipeline (see [1]).
 
 For information, in our Passive Acoustic Monitoring (PAM) framework, we collected `wav` audio data with 16-bit precision and 44.1kHz sampling rate (but 48kHz would naturally be possible).
 
@@ -140,11 +151,11 @@ For information, in our Passive Acoustic Monitoring (PAM) framework, we collecte
 
 As CLAP allows knowing to what extent any text description describes well or badly the content of an audio, it offers a practical flexibility to investigate the presence/absence/recognition of various elements (as text prompts) within the recordings. 
 
-By default, we have defined a list of events/classes of interest for soundscape analysis at `txt/classes.txt`. However, for many practical reasons, one could need to modify and/or remplace these classes to investigate other specific aspect of a soundscape. 
+By default, we have defined a list of events/classes of interest for soundscape analysis at `txt/classes.txt`. However, for many practical reasons, one could need to modify and/or remplace these classes to investigate other specific aspects of a soundscape. 
 
 It is thus completely possible to define a new list of classes `<new-text-file>` and specify their usage to all `src` python codes with the optional parameter `--classes <new-text-file>`. 
 
-As a reminder, the CEI are derived from the high-level aggregation of classes into four global categories: biophony, geophony, anthropophony, and technophony. To enable this aggregation, each text description (corresponding to one line in the `.txt` file) must include one of these four categories, regardless of case sensitivity. A separator ` - ` can be used to investigate a precise element while indicating its affiliation with broader group(s) (the broader group are excluded in this case). 
+As a reminder, the CEI are derived from the high-level aggregation of classes into four global categories: biophony, geophony, anthropophony, and technophony. To enable this aggregation, each text description (corresponding to one line in the `.txt` file) must include one of these four categories, regardless of case sensitivity. A separator ` - ` (space, dash, space) can be used to investigate a precise element while indicating its affiliation with broader group(s) (if so, the broader groups are excluded). 
 
 We encourage users to take inspiration from `txt/classes.txt` to know how to design such a file of text descriptions. For example, a valid file may look like:
 
@@ -161,9 +172,9 @@ Technophony - Vehicles - Airplanes
 Technophony - Vehicles - Cars
 ```
 
-Keep in mind that CLAP text embeddings have been trained to encode linguistic semantics so one can please with the text description provided, including for instance perceptual aspect or notion of distance (see [1]). 
+Keep in mind that CLAP text embeddings have been trained to encode linguistics and semantics, so one can play with the text description provided, including for instance perceptual aspect or notion of distance (see [1]). 
 
-__[IMPORTANT] Note, however, that changing our original proposal of classes modifies the whole pipeline and ultimately generated different CEI that are not identical to the ones we have defined and cannot be directly compared to ours.__ 
+__[IMPORTANT] Note, however, that changing our original proposal of classes modifies the whole pipeline and ultimately generates different CEI that are not identical to the ones we have defined and thus cannot be directly compared to ours.__ 
 
 ### Output: 
 
@@ -172,7 +183,7 @@ Running
 ./run_cei.sh <audio-folder> <text-file> <output-folder> 
 ```
 would result in the creation of three output folders with the following content:
-* `<output-folder>/audio_emb/`: batches of audio embeddings saved in `npz` format (`numpy` compressed arrays) and the list of processed audio in each batch saved in `txt` format.
+* `<output-folder>/audio_emb/`: batches of audio embeddings saved in `npz` format (`numpy` compressed arrays) and the names of processed audios per batch saved in `txt` format.
 
 * `<output-folder>/sim_<text-file>/`: batches of audio-text similarities saved in `npz` format (`numpy` compressed arrays).
 
@@ -187,4 +198,5 @@ would result in the creation of three output folders with the following content:
 ## References
 
 [1] [CLAP](https://github.com/microsoft/CLAP) - Elizalde, B., Deshmukh, S., Al Ismail, M., & Wang, H. (2023, June). Clap: learning audio concepts from natural language supervision. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE. [https://arxiv.org/pdf/2206.04769](https://arxiv.org/pdf/2206.04769) 
+
 
