@@ -22,7 +22,7 @@ A complete executable `run_cei.sh`, encompassing all above-mentioned steps, as w
 If you find this work useful and use it in your research, industrial projects, practical applications, etc. please cite the following paper:
 
 ``` 
-Soon.
+Teytaut, Y., Haupert, S., Dubois, L., Crochard, L., Azémar, F., Guevara, Á. G., Balaresque, P., & Sueur, J. (2026). Contrastive ecoacoustic indices: Large-scale global soundscape characterization with contrastive inference. Methods in Ecology and Evolution, 00, 1–20. https://doi.org/10.1111/2041-210x.70369
 ``` 
 
 and take the time to acknowledge this GitHub page ([https://github.com/ear-team/cei_package](https://github.com/ear-team/cei_package)).
