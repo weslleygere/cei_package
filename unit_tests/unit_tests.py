@@ -42,7 +42,7 @@ except Exception as e:
     raise Exception("/!\ unidecode package could not be imported!")
 
 # ----------------------------------------------------------------------------
-audio_path = '../data/'
+audio_path = '../data/raw'
 texts = '../txt/classes.txt'
 config_file = "../src/config.txt"
 
