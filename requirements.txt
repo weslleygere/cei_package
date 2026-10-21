@@ -10,3 +10,5 @@ torch==2.1.2
 torchaudio==2.1.2
 torchlibrosa==0.1.0
 torchvision==0.16.2
+transformers==4.37.2
+setuptools==80.9.0

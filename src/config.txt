@@ -1,7 +1,7 @@
 # CLAP
 clap_version,2023,str
 clap_caption,clapcap,str
-clap_cuda,False,bool
+clap_cuda,True,bool
 
 # Inference
 batch_size,64,int
